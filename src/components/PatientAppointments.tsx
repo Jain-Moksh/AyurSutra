@@ -9,7 +9,11 @@ interface Appointment {
   type: string;
 }
 
-const PatientAppointments: React.FC = () => {
+interface PatientAppointmentsProps {
+  onBookNew?: () => void;
+}
+
+const PatientAppointments: React.FC<PatientAppointmentsProps> = ({ onBookNew }) => {
   const [appointments] = useState<Appointment[]>([
     {
       id: '1',
@@ -73,7 +77,10 @@ const PatientAppointments: React.FC = () => {
             <p className="text-sm text-gray-600">Manage your upcoming and past appointments</p>
           </div>
         </div>
-        <button className="bg-ayur-green text-white px-4 py-2 rounded-lg hover:bg-ayur-light-green transition-colors duration-300 font-medium">
+        <button 
+          onClick={onBookNew}
+          className="bg-ayur-green text-white px-4 py-2 rounded-lg hover:bg-ayur-light-green transition-colors duration-300 font-medium"
+        >
           Book New
         </button>
       </div>

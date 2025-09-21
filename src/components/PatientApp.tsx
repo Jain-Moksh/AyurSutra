@@ -5,6 +5,8 @@ import PatientHistoryPage from './PatientHistoryPage';
 import PatientPrescriptionsPage from './PatientPrescriptionsPage';
 import PatientReportsPage from './PatientReportsPage';
 import PatientSettingsPage from './PatientSettingsPage';
+import BookAppointmentPage from './BookAppointmentPage';
+import PatientProgressTrackingPage from './PatientProgressTrackingPage';
 import PatientSidebar from './PatientSidebar';
 import PatientHeader from './PatientHeader';
 
@@ -17,21 +19,27 @@ const PatientApp: React.FC = () => {
     setSidebarOpen(false);
   };
 
+  const handleBookNew = () => {
+    setCurrentPage('Book Appointment');
+  };
+
   const renderPage = () => {
     switch (currentPage) {
       case 'Appointments':
-        return <PatientAppointmentsPage />;
+        return <PatientAppointmentsPage onBookNew={handleBookNew} />;
       case 'History':
         return <PatientHistoryPage />;
       case 'Prescriptions':
         return <PatientPrescriptionsPage />;
-      case 'Reports':
-        return <PatientReportsPage />;
+      case 'Progress Tracking':
+        return <PatientProgressTrackingPage />;
       case 'Settings':
         return <PatientSettingsPage />;
+      case 'Book Appointment':
+        return <BookAppointmentPage />;
       case 'Home':
       default:
-        return <PatientDashboard />;
+        return <PatientDashboard onBookNew={handleBookNew} />;
     }
   };
 

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Dashboard from './Dashboard';
 import MessagePage from './MessagePage';
 import SchedulePage from './SchedulePage';
-import ProgressTrackingPage from './ProgressTrackingPage';
-import ComingSoonPage from './ComingSoonPage';
+import PatientsPage from './PatientsPage';
+import TherapiesPage from './TherapiesPage';
+import SettingsPage from './SettingsPage';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
@@ -22,13 +23,12 @@ const DoctorApp: React.FC = () => {
         return <MessagePage />;
       case 'Schedule':
         return <SchedulePage />;
-      case 'Progress Tracking':
-        return <ProgressTrackingPage />;
       case 'Patients':
+        return <PatientsPage />;
       case 'Therapies':
+        return <TherapiesPage />;
       case 'Settings':
-      case 'Reports':
-        return <ComingSoonPage pageName={currentPage} />;
+        return <SettingsPage />;
       case 'Home':
       default:
         return <Dashboard />;

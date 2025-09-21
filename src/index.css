@@ -48,6 +48,22 @@ code {
   }
 }
 
+/* Toast animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
 @keyframes slideOutLeft {
   from {
     opacity: 1;

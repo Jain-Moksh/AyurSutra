@@ -20,10 +20,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen = false, currentPage 
     { name: 'Home', icon: '🏠' },
     { name: 'Schedule', icon: '📅' },
     { name: 'Messages', icon: '💬' },
-    { name: 'Progress Tracking', icon: '📊' },
     { name: 'Patients', icon: '👥' },
     { name: 'Therapies', icon: '🌿' },
-    { name: 'Reports', icon: '📈' },
     { name: 'Settings', icon: '⚙️' },
   ];
 

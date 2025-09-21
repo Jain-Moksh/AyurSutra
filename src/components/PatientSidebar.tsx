@@ -21,7 +21,7 @@ const PatientSidebar: React.FC<PatientSidebarProps> = ({ onClose, isOpen = false
     { name: 'Appointments', icon: '📅' },
     { name: 'History', icon: '📋' },
     { name: 'Prescriptions', icon: '💊' },
-    { name: 'Reports', icon: '📊' },
+    { name: 'Progress Tracking', icon: '📈' },
     { name: 'Settings', icon: '⚙️' },
   ];
 
