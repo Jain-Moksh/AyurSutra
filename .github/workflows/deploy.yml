@@ -1,0 +1,38 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # or your branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: shubhamgalad133
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build Docker image
+        run: docker build -t us-central1-docker.pkg.dev/shubhamgalad133/my-mern-repo/ayursutra:latest1 .
+
+      - name: Push Docker image
+        run: docker push us-central1-docker.pkg.dev/shubhamgalad133/my-mern-repo/ayursutra:latest1
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ayursutra \
+            --image us-central1-docker.pkg.dev/shubhamgalad133/my-mern-repo/ayursutra:latest1 \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated
