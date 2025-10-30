@@ -1,5 +1,7 @@
 # AyurSutra - Doctor Dashboard
 
+deployed with ci cd pipeline
+
 A modern, responsive dashboard for Ayurvedic practitioners built with React, TypeScript, and Tailwind CSS. This dashboard matches the exact design and functionality shown in the provided image.
 
 ## Features
