@@ -1,4 +1,4 @@
-# Build stage
+# ===== Build Stage =====
 FROM node:18 AS build
 WORKDIR /app
 COPY package*.json ./
@@ -6,26 +6,22 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Production stage
+# ===== Production Stage =====
 FROM nginx:alpine
+
+# Copy built React app to Nginx HTML directory
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Tell Cloud Run to use PORT env variable (not hardcoded)
+# Expose the port Cloud Run expects
 EXPOSE 8080
 ENV PORT=8080
 
-# Replace the default Nginx config with one that listens on $PORT
-COPY <<EOF /etc/nginx/conf.d/default.conf
-server {
-  listen ${PORT};
-  server_name localhost;
+# Make Nginx listen on Cloud Run's dynamic $PORT
+RUN sed -i "s/listen       80;/listen       ${PORT};/" /etc/nginx/conf.d/default.conf
 
-  location / {
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
-    try_files \$uri /index.html;
-  }
-}
-EOF
+# Optional: ensure single-page app routes work correctly
+RUN sed -i '/location \/ {/a \\ttry_files $uri /index.html;' /etc/nginx/conf.d/default.conf
 
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
